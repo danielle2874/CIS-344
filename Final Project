@@ -1,0 +1,75 @@
+import mysql.connector
+from mysql.connector import Error
+
+class Database():
+    def __init__(self,
+                 host="localhost",
+                 port="8000",
+                 database="hospital_portal",
+                 user="Danielle E",
+                 password="Mik@yla25"):
+
+        self.host = host
+        self.port = port  
+        self.database = database
+        self.user = user
+        self.password = password
+        self.connection = None
+        self.cursor = None
+        self.connect()
+
+    def connect(self):
+            self.connection = mysql.connector.connect(
+                host=self.host,
+                port=self.port,
+                database=self.database,
+                user=self.user,
+                password=self.password)
+            
+            if self.connection.is_connected():
+                return
+        except Error as e:
+            print("Error while connecting to MySQL", e)
+
+    def addPatient(self, patient_name, age, admission_date, discharge_date):
+        insert into `patients` (patient_name, age, admission_date, discharge_date) VALUES
+        if self.connection.is_connected():
+            self.cursor = self.connection.cursor()
+            query = ('Maria Jozef', 67, '2023-10-01', '2023-10-07'),
+                    ('John Bennett', 29, '2023-11-15', '2023-11-17')
+                    ('Enzo Henry', 45, '2023-12-01', '2023-12-08')
+                    ('Leo White', 52, '2023-12-07', '2023-12-17')
+            self.cursor.execute(query, (patient_name, age, admission_date, discharge_date))
+            self.connection.commit()
+            return
+
+    def getAllPatients(self):
+        if self.connection.is_connected():
+            self.cursor = self.connection.cursor()
+            query = patient_name * FROM patients
+            self.cursor.execute(query)
+            records = self.cursor.fetchall()
+            return records
+
+    def scheduleAppointment(self, patient_id, doctor_id, appointment_date, appointment_time):
+        query = INSERT INTO appointments (patient_id, doctor_id, appointment_date, appointment_time) VALUES (%$,%$,%$);
+    self.cursor.execute(query, (patient_id, doctor_id, appointment_date, appointment_time))
+        pass
+
+    def view_all_Appointments(self):
+           query= SELECT * from Appointments"
+       self.cursor.execute(query)
+        self.connection.commit()
+
+    def dischargePatient(self, patient_id):
+       query = UPDATE patients SET discharge_date = CURRENT_DATE WHERE patient_id = %s
+      self.cursor.execute(query, (patient_id,))
+    
+  def add_patient(self, patient_name, age, admission_date, discharge_date):
+            query = INSERT INTO patients (patient_name, age, admission_date, discharge_date) VALUES (%s, %s, %s, %s)
+            values = (patient_name, age, admission_date, discharge_date)
+            
+            self.cursor.execute(query, values)
+            self.connection.commit()
+
+            print("Patient added successfully.")
